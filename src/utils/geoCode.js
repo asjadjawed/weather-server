@@ -61,7 +61,7 @@ const geoCodeAddressPromise = address => {
       (error, response, body) => {
         if (error) {
           reject("Unable to connect");
-        } else if (response.statusCode !== 200 || body.info.statuscode !== 0) {
+        } else if (response.statusCode !== 200 || !body) {
           reject("Invalid address");
         } else {
           const responseAddress = body.results[0].locations[0];

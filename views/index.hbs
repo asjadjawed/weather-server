@@ -1,3 +1,22 @@
-{{>header}}
+<!DOCTYPE html>
+<html lang="en">
 
-{{>footer}}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/main.js"></script>
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <div class="main-content">
+    {{>header}}
+    <p>Get your weather here</p>
+    <form method="GET" action="weather">
+      <input type="text" name="address" placeholder="Enter location" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  {{>footer}}
