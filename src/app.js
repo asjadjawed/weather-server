@@ -34,7 +34,7 @@ app.get("/help", (request, response) => {
     "help",
     Object.assign(defaultProps, {
       title: "Help",
-      message: ["Help Me!!!", "Help Help Help!"]
+      message: "Help Route"
     })
   );
 });
