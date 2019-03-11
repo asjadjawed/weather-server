@@ -1,5 +1,7 @@
 const request = require("request");
 
+const GEO_CODE_KEY = process.env.GEO_CODE_KEY;
+
 const generateAddress = ({
   street,
   adminArea6,
@@ -25,7 +27,7 @@ const generateAddress = ({
 const geoCodeAddress = (address, callback) => {
   request(
     {
-      url: `http://www.mapquestapi.com/geocoding/v1/address?key=MyMXoKpbZrD89VJG3YaieSGYX5KUAS0P&location=${encodeURIComponent(
+      url: `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
         address
       )}`,
       json: true
