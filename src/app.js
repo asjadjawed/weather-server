@@ -6,6 +6,7 @@ const { geoCodeAddressPromise } = require("./utils/geoCode");
 const { fetchWeatherPromise } = require("./utils/weather");
 
 const app = express();
+const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../views/"));
@@ -74,6 +75,6 @@ app.get("*", (request, response) => {
   );
 });
 
-app.listen(3000, () => {
-  console.log("Server is up on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server is up on port ${PORT}`);
 });
