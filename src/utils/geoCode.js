@@ -9,7 +9,7 @@ const generateAddress = ({
   adminArea4,
   adminArea3,
   adminArea1,
-  postalCode
+  postalCode,
 }) => {
   let addressArray = [
     street,
@@ -19,9 +19,9 @@ const generateAddress = ({
     adminArea4,
     adminArea3,
     adminArea1,
-    postalCode
+    postalCode,
   ];
-  return addressArray.filter(section => section !== "").join(", ");
+  return addressArray.filter((section) => section !== "").join(", ");
 };
 
 const geoCodeAddress = (address, callback) => {
@@ -30,7 +30,7 @@ const geoCodeAddress = (address, callback) => {
       url: `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
         address
       )}`,
-      json: true
+      json: true,
     },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
@@ -44,21 +44,21 @@ const geoCodeAddress = (address, callback) => {
         callback(undefined, {
           Address: generateAddress(responseAddress),
           lat,
-          lng
+          lng,
         });
       }
     }
   );
 };
 
-const geoCodeAddressPromise = address => {
+const geoCodeAddressPromise = (address) => {
   return new Promise((resolve, reject) => {
     request(
       {
-        url: `http://www.mapquestapi.com/geocoding/v1/address?key=MyMXoKpbZrD89VJG3YaieSGYX5KUAS0P&location=${encodeURIComponent(
+        url: `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
           address
         )}`,
-        json: true
+        json: true,
       },
       (error, response, body) => {
         if (error) {
@@ -71,7 +71,7 @@ const geoCodeAddressPromise = address => {
           resolve({
             Address: generateAddress(responseAddress),
             lat,
-            lng
+            lng,
           });
         }
       }
@@ -81,5 +81,5 @@ const geoCodeAddressPromise = address => {
 
 module.exports = {
   geoCodeAddress,
-  geoCodeAddressPromise
+  geoCodeAddressPromise,
 };

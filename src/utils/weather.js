@@ -6,7 +6,7 @@ const fetchWeather = (lat, lng, callback) => {
   request(
     {
       url: `https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${lng}?units=si`,
-      json: true
+      json: true,
     },
     (error, response, body) => {
       if (error) {
@@ -27,8 +27,8 @@ const fetchWeatherPromise = (lat, lng) => {
   return new Promise((resolve, reject) => {
     request(
       {
-        url: `https://api.darksky.net/forecast/31549a4e1da8dfad96ec438465ceab6c/${lat},${lng}?units=si`,
-        json: true
+        url: `https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${lng}?units=si`,
+        json: true,
       },
       (error, response, body) => {
         if (error) {
@@ -45,5 +45,5 @@ const fetchWeatherPromise = (lat, lng) => {
 
 module.exports = {
   fetchWeather,
-  fetchWeatherPromise
+  fetchWeatherPromise,
 };
