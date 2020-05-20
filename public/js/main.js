@@ -18,6 +18,7 @@ window.onload = () => {
           statusMessage.innerHTML = `<h3>${data.address.Address}</h3>`;
           responseMessage.textContent = JSON.stringify(data.weather, null, 2);
         }
-      });
+      })
+      .catch(() => (statusMessage.textContent = "Error Fetching Data!"));
   };
 };
