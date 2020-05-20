@@ -1,4 +1,4 @@
-const request = require("request");
+const axios = require("axios").default;
 
 const GEO_CODE_KEY = process.env.GEO_CODE_KEY;
 
@@ -24,62 +24,29 @@ const generateAddress = ({
   return addressArray.filter((section) => section !== "").join(", ");
 };
 
-const geoCodeAddress = (address, callback) => {
-  request(
-    {
-      url: `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
-        address
-      )}`,
-      json: true,
-    },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        callback("Unable to connect", undefined);
-      } else if (body.info.statuscode !== 0) {
-        callback("Invalid Address: Failed to Parse", undefined);
-      } else {
-        const responseAddress = body.results[0].locations[0];
-        const { lat, lng } = responseAddress.latLng;
+const geoCodeAddress = async (address) => {
+  const url = `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
+    address
+  )}`;
 
-        callback(undefined, {
-          Address: generateAddress(responseAddress),
-          lat,
-          lng,
-        });
-      }
+  try {
+    const addressResponse = await axios.get(url);
+
+    if (!addressResponse.data) {
+      throw new Error("Invalid Address");
     }
-  );
-};
-
-const geoCodeAddressPromise = (address) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        url: `http://www.mapquestapi.com/geocoding/v1/address?key=${GEO_CODE_KEY}&location=${encodeURIComponent(
-          address
-        )}`,
-        json: true,
-      },
-      (error, response, body) => {
-        if (error) {
-          reject("Unable to connect");
-        } else if (response.statusCode !== 200 || !body) {
-          reject("Invalid address");
-        } else {
-          const responseAddress = body.results[0].locations[0];
-          const { lat, lng } = responseAddress.latLng;
-          resolve({
-            Address: generateAddress(responseAddress),
-            lat,
-            lng,
-          });
-        }
-      }
-    );
-  });
+    const resolvedAddress = addressResponse.data.results[0].locations[0];
+    const { lat, lng } = resolvedAddress.latLng;
+    return {
+      Address: generateAddress(resolvedAddress),
+      lat,
+      lng,
+    };
+  } catch (e) {
+    return { error: e.message };
+  }
 };
 
 module.exports = {
   geoCodeAddress,
-  geoCodeAddressPromise,
 };
