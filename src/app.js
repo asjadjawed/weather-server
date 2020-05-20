@@ -20,49 +20,35 @@ const defaultProps = {
 };
 
 app.get("/", (_, res) => {
-  res.render(
-    "index.hbs",
-    Object.assign(defaultProps, { title: "Weather App" })
-  );
+  res.render("index.hbs", { ...defaultProps, title: "Weather App" });
 });
 
 app.get("/about", (_, res) => {
-  res.render("about.hbs", Object.assign(defaultProps, { title: "About" }));
+  res.render("about.hbs", { ...defaultProps, title: "About" });
 });
 
 app.get("/help", (_, res) => {
-  res.render(
-    "help",
-    Object.assign(defaultProps, {
-      title: "Help",
-      message: "Help Route",
-    })
-  );
+  res.render("help", { ...defaultProps, title: "Help", message: "Help Route" });
 });
 
 app.get("/help/*", (_, res) => {
-  res.render(
-    "404",
-    Object.assign(defaultProps, {
-      title: "Help Not Found",
-    })
-  );
+  res.render("404", { ...defaultProps, title: "Help Not Found" });
 });
 
-app.get("/weather", (req, res) => {
+app.get("/weather", async (req, res) => {
   if (!req.query.address) {
     return res.status(400).json({ error: "missing address!" });
   }
 
-  (async (queryAddress) => {
-    try {
-      let address = await geoCodeAddress(queryAddress);
-      let weather = await getWeather(address.lat, address.lng);
-      return res.json({ address, weather });
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
-  })(req.query.address);
+  const queryAddress = req.query.address;
+
+  try {
+    let address = await geoCodeAddress(queryAddress);
+    let weather = await getWeather(address.lat, address.lng);
+    return res.json({ address, weather });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
 });
 
 app.get("*", (_, res) => {
