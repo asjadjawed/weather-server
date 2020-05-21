@@ -10,8 +10,8 @@ const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "../views/"));
-hbs.registerPartials(path.join(__dirname, "../views/partials"));
+app.set("views", path.join(__dirname, "../templates/views/"));
+hbs.registerPartials(path.join(__dirname, "../templates/partials"));
 
 app.use(express.static(path.join(__dirname, "../public/")));
 
