@@ -29,7 +29,7 @@ app.get("/about", (_, res) => {
 });
 
 app.get("/help", (_, res) => {
-  res.render("help", { ...defaultProps, title: "Help", message: "Help Route" });
+  res.render("help", { ...defaultProps, title: "Help", message: "Help!" });
 });
 
 app.get("/help/*", (_, res) => {
