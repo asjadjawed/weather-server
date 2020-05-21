@@ -1,26 +1,5 @@
 const weatherConditions = require("./weatherConditions");
 
-const data = {
-  observation_time: "05:39 AM",
-  temperature: 21,
-  weather_code: 113,
-  weather_icons: [
-    "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png",
-  ],
-  weather_descriptions: ["Sunny"],
-  wind_speed: 7,
-  wind_degree: 170,
-  wind_dir: "S",
-  pressure: 1020,
-  precip: 0,
-  humidity: 40,
-  cloudcover: 0,
-  feelslike: 21,
-  uv_index: 10,
-  visibility: 6,
-  is_day: "yes",
-};
-
 const generateReport = (data) => {
   return `
     <div class="weather-report>
