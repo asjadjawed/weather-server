@@ -53,12 +53,7 @@ app.get("/weather", async (req, res) => {
 });
 
 app.get("*", (_, res) => {
-  res.render(
-    "404",
-    Object.assign(defaultProps, {
-      title: "Page Not Found",
-    })
-  );
+  res.render("404", { ...defaultProps, title: "Page Not Found" });
 });
 
 app.listen(PORT, () => {
