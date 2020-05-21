@@ -6,7 +6,6 @@ const generateReport = (data) => {
       <div class="weather-icon"><img alt="Weather icon" src=${
         data.weather_icons
       }></div>
-      <p>Observation Time: ${data.observation_time}</p>
       <p>Temperature: ${data.temperature}&deg;C</p>
       <p>Feels Like: ${data.feelslike}&deg;C</p>
       <p>Weather: ${
