@@ -16,7 +16,7 @@ window.onload = () => {
           statusMessage.textContent = data.address.error || data.weather.error;
         } else {
           statusMessage.innerHTML = `<h3>${data.address.Address}</h3>`;
-          responseMessage.textContent = JSON.stringify(data.weather, null, 2);
+          responseMessage.innerHTML = data.weather;
         }
       })
       .catch(() => (statusMessage.textContent = "Error Fetching Data!"));

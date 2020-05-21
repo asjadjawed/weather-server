@@ -4,6 +4,7 @@ const hbs = require("hbs");
 
 const { geoCodeAddress } = require("./utils/geoCode");
 const { getWeather } = require("./utils/weatherStack");
+const generateReport = require("./utils/generateReport");
 
 const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 3000;
@@ -45,7 +46,7 @@ app.get("/weather", async (req, res) => {
   try {
     let address = await geoCodeAddress(queryAddress);
     let weather = await getWeather(address.lat, address.lng);
-    return res.json({ address, weather });
+    return res.json({ address, weather: generateReport(weather) });
   } catch (error) {
     return res.status(500).json({ error });
   }
