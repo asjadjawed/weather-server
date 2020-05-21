@@ -33,7 +33,11 @@ app.get("/help", (_, res) => {
 });
 
 app.get("/help/*", (_, res) => {
-  res.render("404", { ...defaultProps, title: "Help Not Found" });
+  res.render("404", {
+    ...defaultProps,
+    title: "404",
+    errorMessage: "Help Article Not Found!",
+  });
 });
 
 app.get("/weather", async (req, res) => {
@@ -53,7 +57,11 @@ app.get("/weather", async (req, res) => {
 });
 
 app.get("*", (_, res) => {
-  res.render("404", { ...defaultProps, title: "Page Not Found" });
+  res.render("404", {
+    ...defaultProps,
+    title: "404",
+    errorMessage: "Page not found!",
+  });
 });
 
 app.listen(PORT, () => {
