@@ -39,7 +39,7 @@ const generateReport = (data) => {
       <p>Precipitation: ${data.precip} MM</p>
       <p>Humidity: ${data.humidity}%</p>
       <p>UV Index: ${data.uv_index}</p>
-      <p>Cloud Cover: ${data.cloudcover}</p>
+      <p>Cloud Cover: ${data.cloudcover}%</p>
       <p>Visibility: ${data.visibility}Km</p>
     </div>
     `;
